@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import typing
 from odoo import fields, models, _, api
-
+# edaaa moneee
 
 class SaleOrder(models.Model):
     """This model is used to add a new state to sales order."""
