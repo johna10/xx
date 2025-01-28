@@ -1,0 +1,7 @@
+EXAMPLE MODEL
+name
+partner_id
+tag_id ( manytomany widget )
+line_ids ( notebook ,page)
+
+
