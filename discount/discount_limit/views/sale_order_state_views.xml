@@ -9,13 +9,7 @@
              <header>
                  <button name="action_approval" type="object"
                             string="Approval" class="oe_highlight" invisible="state != 'approval'"
-                            />
-                 <button name="check_discount_limit" type="object"
-                            string="Test" class="oe_highlight"/>
-<!--                 <button name="action_approval" type="object"-->
-<!--                            string="Approval" class="oe_highlight"-->
-<!--                            invisible="state != 'approval'"-->
-<!--                            groups="purchase.group_purchase_manager"/>-->
+                            groups="purchase.group_purchase_manager"/>
              </header>
              <xpath expr="//field[@name='state']" position="replace">
                  <field name="state" widget="statusbar"

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-import typing
-from odoo import fields, models, _, api
-# edaaa moneee
+from odoo import fields, models, _
+
 
 class SaleOrder(models.Model):
     """This model is used to add a new state to sales order."""
@@ -14,7 +13,6 @@ class SaleOrder(models.Model):
         """Override the write method to check the discount limit on update of the order."""
         res = super(SaleOrder, self).write(vals)
         if 'order_line' in vals or 'discount' in vals:
-            print('inside the write ' , vals)
             new_state = self.check_discount_limit()
             if self.state != new_state:
                 self.state = new_state
@@ -22,40 +20,31 @@ class SaleOrder(models.Model):
 
     def check_discount_limit(self):
         """Check the discount amount exceeds the discount limit."""
-        print('step 1')
         limit_amount = self.env['ir.config_parameter'].sudo().get_param('sale_discount_limit.discount_fixed_limit')
         limit_percent = self.env['ir.config_parameter'].sudo().get_param('sale_discount_limit.discount_percentage_limit')
         limit_fixed = float(limit_amount)
         limit_percentage = float(limit_percent)
-        print('Limit Amount', limit_fixed)
-        print('Limit Percentage', limit_percentage)
-        print(' ')
-
         actual_products_amount = 0
         orders_items = self.order_line
         untaxed_amount = self.amount_untaxed
-        print('untaxed_amount', untaxed_amount)
-        print(self.state)
-
         for item in orders_items:
             print(item.discount)
             actual_products_amount = actual_products_amount + item.price_unit * item.product_uom_qty
-        print('Actual Product Price :', actual_products_amount)
         #If discount limit is a Fixed amount
         if limit_fixed != 0:
             if untaxed_amount < actual_products_amount - limit_fixed:
                 print('Limit')
                 return 'approval'
             else:
-                print('No Limit')
+                print('No limit')
                 return 'draft'
         #If discount limit is a percentage
         else:
             if untaxed_amount < actual_products_amount - (actual_products_amount * (limit_percentage/100)):
-                print('Limit from percentage')
+                print('% Limit')
                 return 'approval'
             else:
-                print('No Limit from percentage')
+                print('% No limit')
                 return 'draft'
 
     def _confirmation_error_message(self):

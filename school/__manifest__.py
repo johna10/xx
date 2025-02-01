@@ -14,7 +14,6 @@
         'security/res.groups.xml',
         'security/ir.model.access.csv',
         'security/ir.rule.xml',
-        'views/res_config_settings_views.xml',
         'views/sale_order_state_views.xml',
         'views/school_student_views.xml',
         'views/school_department_view.xml',

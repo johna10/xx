@@ -11,4 +11,3 @@ from . import res_partner
 from . import school_leaves
 from . import school_exam
 from . import school_paper
-from . import res_config_settings
